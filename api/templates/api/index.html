@@ -1,0 +1,54 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investing Stats</title>
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <style>
+    .logo {
+        font-size: 26px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom logo">
+      <b>Investing Stats</b> 
+    </header>    
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Статистика по валютным парам</h1>
+        <p class="col-md-8 fs-4">
+          С помощью этого веб-приложения можно узнать минимальную и максимальную цену выбранной валютной пары за всё время наблюдения либо увидеть самые свежие данные по выбранной валютной паре
+        </p>
+        <select id="currency_pair" class="form-select form-select-lg mb-3" >
+          {% for currency_pair in currency_pairs %}
+            <option value="{{currency_pair.id}}">{{currency_pair.currency_pair | upper}}</option>
+          {% endfor %}
+        </select>
+        {% csrf_token %}
+        <button class="btn btn-primary btn-lg" type="button" onclick="minmax(document.querySelector('#currency_pair'))">Мин/макс цена</button>&nbsp;
+        <button class="btn btn-success btn-lg" type="button" onclick="list(document.querySelector('#currency_pair'))">10 записей</button>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function minmax(selectEl){
+    var value = (selectEl) ? selectEl.options[selectEl.selectedIndex].value : null;
+    var link = "minmax/";
+    window.location.href=link + value;
+}
+  </script>
+    <script type="text/javascript">
+      function list(selectEl){
+      var value = (selectEl) ? selectEl.options[selectEl.selectedIndex].value : null;
+      var link = "list/";
+      window.location.href=link + value;
+  }
+    </script>
+</body>
+</html>

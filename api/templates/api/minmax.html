@@ -1,0 +1,23 @@
+{% extends 'api/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<div><h1>Статистика по валютной паре {{currency_pair | upper}}</h1>
+  <div>
+    <span class="badge bg-warning text-dark warning-margin">Обратите внимание</span> В таблице представлены данные за всё время наблюдения:
+  </div>  
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Минимальная цена</th>
+            <th scope="col">Максимальная цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">{{min}}</td>
+            <td>{{max}}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

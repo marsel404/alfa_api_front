@@ -1,0 +1,28 @@
+{% extends 'api/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<div><h1>Последние 10 записей по валютной паре {{currency_pair | upper}}</h1>
+
+<div>
+  <span class="badge bg-success warning-margin">Обратите внимание</span> В таблице представлены самые свежие данные. Чтобы получить полный доступ к базе, используйте API:
+</div>  
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Дата</th>
+          <th scope="col">Минимальная цена</th>
+          <th scope="col">Максимальная цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for n in data %}
+        <tr>
+          <th scope="row">{{n.1}}</th>
+          <td>{{n.2}}</td>
+          <td>{{n.3}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock content %}
