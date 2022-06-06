@@ -1,9 +1,0 @@
-version: '3.7'
-services:
-  investing_stats:
-    build: .
-    command: python3 /alfa/investing_stats/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/alfa/investing_stats
-    ports:
-      - 8000:8000
